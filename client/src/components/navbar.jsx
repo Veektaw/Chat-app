@@ -14,7 +14,7 @@ const NavBar = () => {
                 </Link>
             </h2>
             {
-                !user && (
+                user && (
                     <>
                         <span className="text-warning">Logged in as {user?.name}</span>
                     </>
