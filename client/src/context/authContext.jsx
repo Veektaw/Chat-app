@@ -3,7 +3,8 @@ import { baseUrl, postRequest } from "../utils/services";
 
 export const AuthContext = createContext();
 
-export const AuthContextProvider = ({ children }) => {
+// eslint-disable-next-line react/prop-types
+export const AuthContextProvider = ({children}) => {
   const [user, setUser] = useState(null);
   const [signupError, setSignupError] = useState(null);
   const [isSignupLoading, isSetSignupLoading] = useState(false)
@@ -19,8 +20,6 @@ export const AuthContextProvider = ({ children }) => {
     email: "",
     password: ""
   });
-
-  console.log("sign up info:", signupInfo)
 
   useEffect(() => {
     const user = localStorage.getItem("User")
@@ -40,7 +39,7 @@ export const AuthContextProvider = ({ children }) => {
     isSetSignupLoading(true);
     setSignupError(null)
 
-    const response = await postRequest(`${baseUrl}/signup`, JSON.stringify(signupInfo));
+    const response = await postRequest(`${baseUrl}/user/signup`, JSON.stringify(signupInfo));
 
     isSetSignupLoading(false)
 
@@ -58,7 +57,7 @@ export const AuthContextProvider = ({ children }) => {
     isSetLoginLoading(true);
     setLoginError(null)
 
-    const response = await postRequest(`${baseUrl}/login`, JSON.stringify(loginInfo));
+    const response = await postRequest(`${baseUrl}/user/login`, JSON.stringify(loginInfo));
     isSetLoginLoading(false)
 
     if (response.error) {
