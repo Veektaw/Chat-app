@@ -26,13 +26,10 @@ const findUser = asyncWrapper(async (req, res) => {
 
 const findAllUsers = asyncWrapper(async (req, res) => {
   try {
-    // Find all users and store them in an array
+    
     const users = await User.find();
 
-    // Extract the name and email properties from each user document
-    const userDetails = users.map(user => ({ name: user.name, email: user.email }));
-
-    res.status(200).json({ message: "Users found", users: userDetails });
+    res.status(200).json(users);
 
   } catch (error) {
     console.log(error);

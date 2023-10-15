@@ -10,7 +10,7 @@ const createChatPage = asyncWrapper(async (req, res) => {
         })
         if (chat) return res.status(200).json(chat);
 
-        const newChat = new chatModel({
+        const newChat = new Chat({
             members: [firstId, secondId]
         });
 
@@ -47,7 +47,7 @@ const findAllUserChats = asyncWrapper(async (req, res) => {
     try {
         const {firstId, secondId} = req.params;
 
-        const chat = await Chat.findOne({
+        const chat = await Chat.find({
             members: {$all: [firstId, secondId]}
         })
 
